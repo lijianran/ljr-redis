@@ -5,14 +5,21 @@ package redis
 
 // Connection 抽象单个对 redis 客户端的连接
 type Connection interface {
+	// 传递响应到客户端
 	Write([]byte) error
+	// 设置 Auth 密码
 	SetPassword(string)
+	// 获取 Auth 密码
 	GetPassword() string
 
-	// client 客户端订阅 channels
+	/* client 客户端订阅 channels */
+	// 订阅
 	Subscribe(channel string)
+	// 取消订阅
 	UnSubscribe(channel string)
+	// 订阅个数
 	SubsCount() int
+	// 获取所有订阅
 	GetChannels() []string
 
 	/* 复杂指令 */
@@ -29,7 +36,9 @@ type Connection interface {
 	// 获取 watching 列表
 	GetWatching() map[string]uint32
 
-	// used for multi database
+	/* 多数据库 */
+	// 获取当前数据库索引
 	GetDBIndex() int
+	// 选择数据库
 	SelectDB(int)
 }

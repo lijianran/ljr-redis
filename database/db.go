@@ -20,7 +20,7 @@ const (
 
 // 数据库抽象，能存储数据和执行指令
 type DB struct {
-	// index      int
+	index      int       // 数据库索引
 	data       dict.Dict // 字典数据类型
 	ttlMap     dict.Dict // time.Time
 	versionMap dict.Dict // version (uint32)
@@ -111,7 +111,8 @@ func (db *DB) execNormalCommand(cmdLine [][]byte) redis.Reply {
 	cmdName := strings.ToLower(string(cmdLine[0]))
 	cmd, ok := cmdTable[cmdName]
 	if !ok {
-		return reply.MakeErrReply("ERR unkonwn command '" + cmdName + "'")
+		// return reply.MakeErrReply("ERR unkonwn command '" + cmdName + "'")
+		return reply.MakeErrReply("爷还没写 '" + cmdName + "' 这个指令")
 	}
 	if !validateArity(cmd.arity, cmdLine) {
 		return reply.MakeArgNumErrReply(cmdName)
