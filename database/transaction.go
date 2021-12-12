@@ -13,7 +13,7 @@ import (
 // 开始执行复杂指令
 func StartMulti(conn redis.Connection) redis.Reply {
 	if conn.InMultiState() {
-		// 已经在执行复杂命令，不能叠加
+		// 已经在执行复杂指令，不能叠加
 		return reply.MakeErrReply("ERR MULTI calls can not be nested")
 	}
 	// 设置在执行复杂指令
@@ -24,10 +24,10 @@ func StartMulti(conn redis.Connection) redis.Reply {
 // 取消还未执行的复杂指令
 func DiscardMulti(conn redis.Connection) redis.Reply {
 	if !conn.InMultiState() {
-		// 还没有开始执行复杂命令，不能取消
+		// 还没有开始执行复杂指令，不能取消
 		return reply.MakeErrReply("ERR DISCARD without MULTI")
 	}
-	// 清空命令队列
+	// 清空指令队列
 	conn.ClearQueuedCmds()
 	// 设置没有执行复杂指令
 	conn.SetMultiState(false)

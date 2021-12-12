@@ -33,6 +33,7 @@ type RedisHandler struct {
 func MakeRedisHandler() *RedisHandler {
 	// var db database.DB
 
+	// 单机模式
 	db := database2.NewStandaloneServer()
 	return &RedisHandler{
 		db: db,
@@ -101,7 +102,7 @@ func (h *RedisHandler) Handle(ctx context.Context, conn net.Conn) {
 // 关闭客户端连接
 func (h *RedisHandler) closeClient(client *connection.Connection) {
 	_ = client.Close()
-	// h.db.AfterClientClose(client)
+	h.db.AfterClientClose(client)
 	h.activeConn.Delete(client)
 }
 
@@ -118,6 +119,6 @@ func (h *RedisHandler) Close() error {
 		return true
 	})
 
-	// h.db.Close()
+	h.db.Close()
 	return nil
 }

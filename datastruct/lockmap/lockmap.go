@@ -102,7 +102,7 @@ func (locks *Locks) toLockIndices(keys []string, reverse bool) []uint32 {
 	return indices
 }
 
-// 复杂命令 上写锁 write
+// 复杂指令 上写锁 write
 func (locks *Locks) Locks(keys ...string) {
 	indices := locks.toLockIndices(keys, false)
 	for _, index := range indices {
@@ -111,7 +111,7 @@ func (locks *Locks) Locks(keys ...string) {
 	}
 }
 
-// 复杂命令 开写锁 write
+// 复杂指令 开写锁 write
 func (locks *Locks) UnLocks(keys ...string) {
 	indices := locks.toLockIndices(keys, true)
 	for _, index := range indices {
@@ -120,7 +120,7 @@ func (locks *Locks) UnLocks(keys ...string) {
 	}
 }
 
-// 复杂命令 上读锁 read
+// 复杂指令 上读锁 read
 func (locks *Locks) RLocks(keys ...string) {
 	indices := locks.toLockIndices(keys, false)
 	for _, index := range indices {
@@ -129,7 +129,7 @@ func (locks *Locks) RLocks(keys ...string) {
 	}
 }
 
-// 复杂命令 开读锁 read
+// 复杂指令 开读锁 read
 func (locks *Locks) RUnLocks(keys ...string) {
 	indices := locks.toLockIndices(keys, true)
 	for _, index := range indices {
@@ -138,7 +138,7 @@ func (locks *Locks) RUnLocks(keys ...string) {
 	}
 }
 
-// 复杂命令 上读写锁 允许 writeKeys 和 readKeys 中存在重复的 key
+// 复杂指令 上读写锁 允许 writeKeys 和 readKeys 中存在重复的 key
 func (locks *Locks) RWLocks(writeKeys []string, readKeys []string) {
 	// 全部锁列表
 	keys := append(writeKeys, readKeys...)
@@ -166,7 +166,7 @@ func (locks *Locks) RWLocks(writeKeys []string, readKeys []string) {
 	}
 }
 
-// 复杂命令 开读写锁
+// 复杂指令 开读写锁
 func (locks *Locks) RWUnLocks(writeKeys []string, readKeys []string) {
 	// 全部锁列表
 	keys := append(writeKeys, readKeys...)

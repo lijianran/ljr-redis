@@ -62,3 +62,13 @@ var theOkReply = new(OkReply)
 func MakeOkReply() *OkReply {
 	return theOkReply
 }
+
+/* ------------ PongReply is +PONG ------------ */
+type PongReply struct{}
+
+var pongBytes = []byte("+PONG\r\n")
+
+// marshal 安排 redis.Reply ToBytes
+func (r *PongReply) ToBytes() []byte {
+	return pongBytes
+}

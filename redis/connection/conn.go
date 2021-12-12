@@ -42,8 +42,7 @@ func (c *Connection) RemoteAddr() net.Addr {
 	return c.conn.RemoteAddr()
 }
 
-/* ----------- interface/redis/conn.go ----------- */
-// 安排接口
+/* ----------- 安排 interface/redis/conn.go 接口 ----------- */
 
 // 通过 tcp 连接传递响应给客户端
 func (c *Connection) Write(b []byte) error {
@@ -125,7 +124,7 @@ func (c *Connection) InMultiState() bool {
 // 设置是否在执行复杂指令
 func (c *Connection) SetMultiState(state bool) {
 	if !state {
-		// 取消执行复杂命令需要清空数据
+		// 取消执行复杂指令需要清空数据
 		c.watching = nil
 		c.queue = nil
 	}
